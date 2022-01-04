@@ -35,6 +35,7 @@ export default {
 .nav ul {
   display: flex;
   justify-content: space-between;
+  padding: 0 35px;
 }
 
 .movie .tab {
@@ -44,5 +45,6 @@ export default {
 .movie .tab > li {
   display: inline-block;
   margin: 0 20px;
+  cursor: pointer;
 }
 </style>

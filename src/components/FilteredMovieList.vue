@@ -4,8 +4,10 @@
       <!-- {{ movies }} -->
       <a href="">
         <h4 class="hide">{{ movie.name }}</h4>
-        <span class="hide rate rate20">{{ movie.rate }}</span>
-        <strong class="rank"></strong>
+        <span class="hide rate" :class="`rate${movie.rate}`">{{
+          movie.rate
+        }}</span>
+        <strong class="rank">{{ index }}</strong>
         <img
           class="poster"
           :src="require(`@/assets/${movie.src}`)"
@@ -54,6 +56,19 @@ ol > li .rank {
   color: white;
   text-shadow: 0 0 10px black;
 }
+.movie > ol > li .rate {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  content: "";
+  width: 25px;
+  height: 25px;
+  display: block;
+  /* background-image: url("../images/icon_rate.png"); */
+  background-image: url("~@/assets/icon_rate.png");
+  background-repeat: no-repeat;
+}
+
 ol > li .rate15 {
   background-position: 0 -60px;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="movie">
-    <nav class="nav">
+    <!-- <nav class="nav">
       <ul class="tab">
         <li v-for="(item, index) in _navList" :key="index">
           <a @click="clickOrdering(item)">
@@ -8,24 +8,32 @@
           </a>
         </li>
       </ul>
-      <FilteredMovieList :movies="movies" />
-    </nav>
+    </nav> -->
+    <Navigation
+      v-on:clickOrdering="clickOrdering"
+      v-bind:_navList="_navList"
+      :navList="navList"
+      v-bind:ordered="ordered"
+    />
+    <FilteredMovieList :movies="movies" />
   </div>
 </template>
 
 <script>
 import FilteredMovieList from "./FilteredMovieList.vue";
+import Navigation from "./Navigation.vue";
 export default {
   name: "Movie",
-  components: { FilteredMovieList },
+  components: { FilteredMovieList, Navigation },
   computed: {
     _navList() {
       return Object.keys(this.navList);
     },
   },
+
   data() {
     return {
-      ordered: "예매순",
+      ordered: "ticketing",
       navList: {
         예매순: "ticketing",
         평점순: "score",
@@ -119,9 +127,7 @@ export default {
   },
   methods: {
     clickOrdering(name) {
-      this.ordered = this.navList[name];
-      console.log(this.ordered);
-
+      this.ordered = name;
       this.movies.sort((a, b) => {
         return b[this.ordered] - a[this.ordered];
       });
@@ -138,21 +144,5 @@ export default {
   background-color: #242424;
   /* background-color: white; */
   overflow: hidden;
-}
-.nav ul {
-  display: flex;
-  justify-content: space-between;
-}
-
-.movie .tab {
-  text-align: center;
-  font-size: 16px;
-}
-.movie .tab > li {
-  display: inline-block;
-  margin: 0 20px;
-}
-.movie .tab > li.on a {
-  color: red;
 }
 </style>
